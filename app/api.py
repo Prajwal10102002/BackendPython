@@ -3,7 +3,10 @@ import joblib
 from pydantic import BaseModel
 
 app = FastAPI()
-model = joblib.load("cropmodel.pkl")
+try:
+    model = joblib.load("cropmodel.pkl")
+except Exception as e:
+    print(f"Error loading the model: {e}")
 
 class CropData(BaseModel):
     N: float
